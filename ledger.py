@@ -65,5 +65,42 @@ def battle(attacker, defender):
         )
 
 
-# Test the function by calling it!
-battle("Targaryen", "Lannister")
+# --- The Game Loop ---
+print("\n" + "=" * 40)
+print(" Welcome to The Iron Throne Conquest!")
+print("=" * 40)
+
+while True:
+    # 1. Ask the user, strip spaces, and make it lowercase
+    command = input("\nEnter command (or 'quit' to exit): ").strip().lower()
+
+    if command == "quit":
+        print("You have yielded the Iron Throne. Farewell!")
+        break
+
+    # 2. Split the command into a list of words
+    parts = command.split()
+
+    # 3. Guard clause: If they just pressed Enter without typing, restart the loop
+    if len(parts) == 0:
+        continue
+
+    # 4. Isolate the main action (the first word)
+    action = parts[0]  # Hint: Lists start at index 0!
+
+    # 5. Handle the "march" command
+    if action == "march" and len(parts) == 3:
+        attacker = parts[1].capitalize()
+        defender = parts[2].capitalize()
+
+        # Guard clause: Do these houses actually exist?
+        if attacker not in house_armies or defender not in house_armies:
+            print("Invalid order! One or both of those houses do not exist.")
+            continue  # Skips the rest of the loop and starts over
+
+        # Movement Validation (from Milestone 2)
+        if defender in westeros_map[attacker]:
+            # The move is valid! Trigger the combat system.
+            battle(attacker, defender)
+        else:
+            print(f"Invalid move! {defender} does not border {attacker}.")
