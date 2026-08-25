@@ -1,23 +1,39 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  // This hook runs once when the page loads
+  // 1. Create a state variable to hold our armies dictionary.
+  // The <Record<string, number>> part is TypeScript strictly enforcing that
+  // our dictionary will have string keys (houses) and number values (troops).
+  const [armies, setArmies] = useState<Record<string, number>>({});
+
   useEffect(() => {
-    // 1. We call our Python API
     fetch("http://127.0.0.1:8000/armies")
-      .then((response) => response.json()) // 2. Convert the response to JSON
+      .then((response) => response.json())
       .then((data) => {
-        // 3. Log the data to the browser console!
-        console.log("Message from the Citadel:", data);
+        // 2. Save the fetched data into React State!
+        setArmies(data.data);
       })
       .catch((error) => console.error("Ravens intercepted!", error));
   }, []);
 
   return (
-    <div>
+    <div className="game-board">
       <h1>⚔️ The Iron Throne Conquest</h1>
-      <p>Check your browser console (F12) to see the data from Python!</p>
+
+      <h2>Active Banners</h2>
+      {/* 3. Loop through the dictionary and render a card for each house */}
+      <div className="banner-grid">
+        {Object.entries(armies).map(([house, troops]) => (
+          <div
+            key={house}
+            className="house-card"
+          >
+            <h3>House {house}</h3>
+            <p>Troops: {troops}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
