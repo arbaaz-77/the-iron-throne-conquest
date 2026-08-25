@@ -1,39 +1,51 @@
-body {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.game-board {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 2rem;
-}
-
-.banner-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.house-card {
-  background-color: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 8px;
+.command-tent {
+  background-color: #222;
   padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  transition: transform 0.2s;
+  border-radius: 8px;
+  border: 1px solid #444;
+  margin-bottom: 2rem;
+}
+
+.battle-message {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #d4af37;
+  margin-bottom: 1rem;
+}
+
+.inputs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.house-card:hover {
-  transform: translateY(-5px);
-  border-color: #888;
+button:hover {
+  background-color: #aa0000;
 }
 
-h3 {
-  margin-top: 0;
-  color: #d4af37; /* Gold color for the houses */
+.vs-text {
+  font-weight: bold;
+  color: #888;
 }
